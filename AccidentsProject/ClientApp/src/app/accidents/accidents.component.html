@@ -1,0 +1,20 @@
+<h1>Accidents list</h1>
+
+<p *ngIf="!accidents"><em>Loading...</em></p>
+
+<table class='table' *ngIf="accidents">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Severity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let accident of accidents">
+      <td>{{ accident.id }}</td>
+      <td>{{ accident.date }}</td>
+      <td>{{ accident.severity }}</td>
+    </tr>
+  </tbody>
+</table>
