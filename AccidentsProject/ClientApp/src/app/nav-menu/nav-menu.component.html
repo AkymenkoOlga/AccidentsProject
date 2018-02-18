@@ -18,10 +18,15 @@
                     </a>
                 </li>
                 <li [routerLinkActive]='["link-active"]'>
-                  <a [routerLink]='["/accidents"]' (click)='collapse()'>
-                    <span class='glyphicon glyphicon-th-list'></span> Accidents
+                  <a [routerLink]='["/about"]' (click)='collapse()'>
+                    <span class='glyphicon glyphicon-th-list'></span> About
                   </a>
                 </li>
+              <li [routerLinkActive]='["link-active"]'>
+                <a [routerLink]='["/accidents"]' (click)='collapse()'>
+                  <span class='glyphicon glyphicon-th-list'></span> Accidents
+                </a>
+              </li>
               <li [routerLinkActive]='["link-active"]'>
                 <a [routerLink]='["/map"]' (click)='collapse()'>
                   <span class='glyphicon glyphicon-th-list'></span> Map

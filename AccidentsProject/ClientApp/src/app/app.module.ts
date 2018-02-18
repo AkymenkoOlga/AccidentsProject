@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AccidentsComponent } from './accidents/accidents.component';
 import { MapComponent } from './map/map.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MapComponent } from './map/map.component';
     NavMenuComponent,
     HomeComponent,
     AccidentsComponent,
-    MapComponent
+    MapComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,7 +27,8 @@ import { MapComponent } from './map/map.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'accidents', component: AccidentsComponent },
-      { path: 'map', component: MapComponent }
+      { path: 'map', component: MapComponent },
+      { path: 'about', component: AboutComponent }
     ])
   ],
   providers: [],
