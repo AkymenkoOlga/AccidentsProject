@@ -5,30 +5,30 @@
       <legend>My tags</legend>
       <table>
         <tr>
-          <td><input type="checkbox" name="animal" value="Fatal_Count" />Fatality</td>
-          <td><input type="checkbox" name="animal" value="Sch_Bus_Ind" />School Bus</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="user.Fatal_Count"/>Fatality</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Sch_Bus_Ind" />School Bus</td>       
         </tr>
         <tr>
-          <td><input type="checkbox" name="animal" value="Bicycle_Count" />Bicycles</td>
-          <td><input type="checkbox" name="animal" value="Motorcycle_Count" />Motorcycles</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Bicycle_Count" />Bicycles</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Motorcycle_Count" />Motorcycles</td>
         </tr>
         <tr>
-          <td><input type="checkbox" name="animal" value="Automobile_Count" />Cars</td>
-          <td><input type="checkbox" name="animal" value="Ped_Count" />Pedestrians involved</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Automobile_Count" />Cars</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Ped_Count" />Pedestrians involved</td>
         </tr>
         <tr>
-          <td><input type="checkbox" name="animal" value="Ped_Fatal" />Pedestrians fatalities</td>
-          <td><input type="checkbox" name="animal" value="TFC_Detour_ind" />Traffic Detoured</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Ped_Fatal" />Pedestrians fatalities</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="TFC_Detour_ind" />Traffic Detoured</td>
         </tr>
         <tr>
-          <td><input type="checkbox" name="animal" value="Time_of_day_day" />Day</td>
-          <td><input type="checkbox" name="animal" value="Time_of_day_night" />Night</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Time_of_day_day" />Day</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Time_of_day_night" />Night</td>
         </tr>
         <tr>
-          <td><input type="checkbox" name="animal" value="Unb_death_count" />Killed not wearing a seatbelt</td>
+          <td><input type="checkbox" name="animal" [(ngModel)]="Unb_death_count" />Killed not wearing a seatbelt</td>
         </tr>
       </table>
-          <input type="submit" value="Submit" style="background-color:#29a329; color:#ffffff;" />
-</fieldset>
-</form>
+      <input type="submit" value="Submit" style="background-color:#29a329; color:#ffffff;" />
+    </fieldset>
+  </form>
 </body>

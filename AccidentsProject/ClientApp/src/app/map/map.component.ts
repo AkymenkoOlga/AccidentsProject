@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
+import { Forms } from './map.forms';
 
 @Component({
   selector: 'app-map',
@@ -15,3 +16,25 @@ export class MapComponent implements OnInit {
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 }
+@Component({
+  selector: 'app-forms',
+  templateUrl: 'map.component.html'
+})
+export class FormsComponent implements OnInit {
+  public user: Forms;
+  ngOnInit() {
+      // initialize my forms here
+      this.user = {
+        Fatal_Count: false, //my checkboxes
+        Bicycle_Count: false,
+        Motorcycle_Count: false,
+        Automobile_Count: false,
+        Ped_Count: false,
+        Ped_Fatal: false,
+        TFC_Detour_ind: false,
+        Time_of_day_day: false,
+        Time_of_day_night: false,
+        Unb_death_count: false
+      }
+    }
+  }
