@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 declare var google: any;
 import { Forms } from './map.forms';
 
@@ -13,6 +15,10 @@ export class MapComponent implements OnInit {
       zoom: 5,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
+    let startDate = new FormControl(new Date());
+    let endDate = new FormControl(new Date());
+
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 }
