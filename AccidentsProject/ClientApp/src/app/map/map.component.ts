@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 declare var google: any;
-import { Forms } from './map.forms';
 
 @Component({
   selector: 'app-map',
@@ -16,21 +14,12 @@ export class MapComponent implements OnInit {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
     let startDate = new FormControl(new Date());
     let endDate = new FormControl(new Date());
 
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-  }
-}
-@Component({
-  selector: 'app-forms',
-  templateUrl: 'map.component.html'
-})
-export class FormsComponent implements OnInit {
-  public user: Forms;
-  ngOnInit() {
-      // initialize my forms here
-      this.user = {
+    var user = {
         Fatal_Count: false, //my checkboxes
         Bicycle_Count: false,
         Motorcycle_Count: false,
@@ -42,5 +31,18 @@ export class FormsComponent implements OnInit {
         Time_of_day_night: false,
         Unb_death_count: false
       }
-    }
   }
+}
+
+interface Forms {
+  Fatal_Count?: boolean; //checkboxes
+  Bicycle_Count?: boolean;
+  Motorcycle_Count?: boolean;
+  Automobile_Count?: boolean;
+  Ped_Count?: boolean;
+  Ped_Fatal?: boolean;
+  TFC_Detour_ind?: boolean;
+  Time_of_day_day?: boolean;
+  Time_of_day_night?: boolean;
+  Unb_death_count?: boolean;
+}

@@ -1,6 +1,18 @@
 <body>
   <div id="googleMap" style="width:500px;height:380px;"></div>
 
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" [formControl]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Choose an end date" [formControl]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
   <form method="post">
     <fieldset>
       <legend>My tags</legend>
@@ -32,17 +44,5 @@
       <input type="submit" value="Submit" style="background-color:#29a329; color:#ffffff;" />
     </fieldset>
   </form>
-
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" [formControl]="startDate">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker2" placeholder="Choose an end date" [formControl]="endDate">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
 
 </body>
