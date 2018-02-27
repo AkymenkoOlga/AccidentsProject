@@ -30,3 +30,12 @@ body {
 .example-margin {
   margin: 0 10px;
 }
+
+.date-card {
+  max-width: 500px;
+}
+
+.tags-card {
+  max-width: 500px;
+}
+
