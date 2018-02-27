@@ -1,5 +1,10 @@
-<body>
-  <div id="googleMap" style="width:500px;height:380px;"></div>
+<div id="googleMap" style="width:500px;height:380px;"></div>
+
+<br/>
+
+<mat-card>
+<mat-card-content>
+<h3 class="example-h3">Date</h3>
 
   <mat-form-field>
     <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" [formControl]="startDate">
@@ -13,36 +18,22 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 
-  <form method="post">
-    <fieldset>
-      <legend>My tags</legend>
-      <table>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="user.Fatal_Count" />Fatality</td>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Sch_Bus_Ind" />School Bus</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Bicycle_Count" />Bicycles</td>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Motorcycle_Count" />Motorcycles</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Automobile_Count" />Cars</td>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Ped_Count" />Pedestrians involved</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Ped_Fatal" />Pedestrians fatalities</td>
-          <td><input type="checkbox" name="animal" [(ngModel)]="TFC_Detour_ind" />Traffic Detoured</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Time_of_day_day" />Day</td>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Time_of_day_night" />Night</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="animal" [(ngModel)]="Unb_death_count" />Killed not wearing a seatbelt</td>
-        </tr>
-      </table>
-      <input type="submit" value="Submit" style="background-color:#29a329; color:#ffffff;" />
-    </fieldset>
-  </form>
+  </mat-card-content>
+</mat-card>
 
-</body>
+<mat-card>
+  <mat-card-content>
+    <h3 class="example-h3">Tags</h3>
+
+    <section class="example-section">
+      <mat-checkbox class="example-margin" [(ngModel)]="fatal">Fatal</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="bicycle">Bicycle</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="motorcycle">Motorcycle</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="automobile">Automobile</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="night">Night</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="day">Day</mat-checkbox>
+    </section>
+
+  </mat-card-content>
+</mat-card>
+

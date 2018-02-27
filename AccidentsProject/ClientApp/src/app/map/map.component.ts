@@ -19,30 +19,5 @@ export class MapComponent implements OnInit {
     let startDate = new FormControl(new Date());
     let endDate = new FormControl(new Date());
 
-    var user = {
-        Fatal_Count: false, //my checkboxes
-        Bicycle_Count: false,
-        Motorcycle_Count: false,
-        Automobile_Count: false,
-        Ped_Count: false,
-        Ped_Fatal: false,
-        TFC_Detour_ind: false,
-        Time_of_day_day: false,
-        Time_of_day_night: false,
-        Unb_death_count: false
-      }
   }
-}
-
-interface Forms {
-  Fatal_Count?: boolean; //checkboxes
-  Bicycle_Count?: boolean;
-  Motorcycle_Count?: boolean;
-  Automobile_Count?: boolean;
-  Ped_Count?: boolean;
-  Ped_Fatal?: boolean;
-  TFC_Detour_ind?: boolean;
-  Time_of_day_day?: boolean;
-  Time_of_day_night?: boolean;
-  Unb_death_count?: boolean;
 }
