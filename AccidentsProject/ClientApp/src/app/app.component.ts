@@ -8,3 +8,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 }
+
+export interface Accident {
+  id: string;
+  date: Date;
+  location: Location;
+  tags: string[];
+}
+
+export interface Location {
+  coordinates: Coordinates;
+}
+
+export interface Coordinates {
+  lat: number;
+  lon: number;
+}
