@@ -18,5 +18,15 @@ export class AccidentsComponent {
 interface Accident {
   id: string;
   date: Date;
-  severity: string;
+  location: Location;
+  tags: string [];
+}
+
+interface Location {
+  coordinates: Coordinates;
+}
+
+interface Coordinates {
+  lat: number;
+  lon: number;
 }
