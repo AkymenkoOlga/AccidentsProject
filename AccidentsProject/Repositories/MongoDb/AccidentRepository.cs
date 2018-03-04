@@ -36,7 +36,7 @@ namespace AccidentsProject.Repositories
                     Tags = tags.OrderBy(arg => Guid.NewGuid()).Take(2).ToList()
                 });
                 x++;
-            } while (x < 10);
+            } while (x < 25);
         }
 
         private static double GetRandomNumber(double minimum, double maximum)
