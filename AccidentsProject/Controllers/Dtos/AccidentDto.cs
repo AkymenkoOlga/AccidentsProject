@@ -18,25 +18,16 @@ namespace AccidentsProject.Controllers.Dtos
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("severity")]
-        public string Severity { get; set; }
-
         [JsonProperty("tags")]
         public string[] Tags { get; set; }
 
         public Accident ToModel()
         {
-            if (!Enum.TryParse<Severity>(Convert.ToString(this.Severity), out Severity severity))
-            {
-                severity = Services.Models.Severity.Unknown;
-            }
-
             return new Accident()
             {
                 Id = this.Id,
                 Date = this.Date,
                 Location = this.Location?.ToModel(),
-                Severity = severity,
                 Tags = this.Tags
             };
         }
@@ -47,7 +38,6 @@ namespace AccidentsProject.Controllers.Dtos
                 Id = accident.Id,
                 Date = accident.Date,
                 Location = accident.Location != null ? LocationDto.From(accident.Location) : null,
-                Severity = accident.Severity.ToString(),
                 Tags = accident.Tags
             };
     }

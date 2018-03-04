@@ -40,14 +40,18 @@
     <tr>
       <th>ID</th>
       <th>Date</th>
-      <th>Severity</th>
+      <th>Latitude</th>
+      <th>Lonitude</th>
+      <th>Tags</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let accident of accidents">
       <td>{{ accident.id }}</td>
       <td>{{ accident.date }}</td>
-      <td>{{ accident.severity }}</td>
+      <td>{{ accident.location.coordinates.lat }}</td>
+      <td>{{ accident.location.coordinates.lon }}</td>
+      <td>{{ accident.tags }}</td>
     </tr>
   </tbody>
 </table>-->

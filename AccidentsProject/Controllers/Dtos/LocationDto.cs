@@ -14,7 +14,7 @@ namespace AccidentsProject.Controllers.Dtos
         [JsonProperty("country_name")]
         public string CountryName { get; set; }
 
-        [JsonProperty("geo_coordinates")]
+        [JsonProperty("coordinates")]
         public LatLonDto GeoCoordinates { get; set; }
 
         [JsonProperty("name")]

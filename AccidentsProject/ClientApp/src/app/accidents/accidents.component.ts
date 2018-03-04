@@ -1,6 +1,8 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import Appcomponent = require("../app.component");
+import Accident = Appcomponent.Accident;
 
 @Component({
   selector: 'app-accidents',
@@ -15,6 +17,7 @@ export class TablePaginationExample {
       this.accidents = result;
     }, error => console.error(error));
   }
+
   displayedColumns = ['id', 'date', 'severity'];
   dataSource = new MatTableDataSource<Accident>(this.accidents);
 
@@ -23,15 +26,3 @@ export class TablePaginationExample {
     this.dataSource.paginator = this.paginator;
   }
 }
-
-
-export interface Accident {
-  id: string;
-  date: Date;
-  severity: string;
-}
-
-
-
-
-
