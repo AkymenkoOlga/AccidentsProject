@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import Appcomponent = require("../app.component");
+import Accident = Appcomponent.Accident;
 
 @Component({
   selector: 'app-accidents',
@@ -15,18 +17,3 @@ export class AccidentsComponent {
   }
 }
 
-interface Accident {
-  id: string;
-  date: Date;
-  location: Location;
-  tags: string [];
-}
-
-interface Location {
-  coordinates: Coordinates;
-}
-
-interface Coordinates {
-  lat: number;
-  lon: number;
-}
