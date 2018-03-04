@@ -10,8 +10,6 @@ namespace AccidentsProject.Services.Models
 
         public Location Location { get; set; }
 
-        public Severity Severity { get; set; }
-
         public string[] Tags { get; set; }
     }
 }
