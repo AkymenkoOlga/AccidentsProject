@@ -1,5 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Appcomponent = require("../app.component");
 import Accident = Appcomponent.Accident;
@@ -9,20 +8,24 @@ import Accident = Appcomponent.Accident;
   templateUrl: './accidents.component.html'
 })
 
-export class TablePaginationExample {
+export class AccidentsComponent implements OnInit {
+
   public accidents: Accident[];
+
+  displayedColumns = ['id', 'date', "lat", "lon", 'tags'];
+  dataSource = this.accidents;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Accident[]>(baseUrl + 'api/accidents').subscribe(result => {
       this.accidents = result;
+      this.refresh();
     }, error => console.error(error));
   }
 
-  displayedColumns = ['id', 'date', 'severity'];
-  dataSource = new MatTableDataSource<Accident>(this.accidents);
+  ngOnInit() {
+  }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  refresh() {
+    this.dataSource = this.accidents;
   }
 }

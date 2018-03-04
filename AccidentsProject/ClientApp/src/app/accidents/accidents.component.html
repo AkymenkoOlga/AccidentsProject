@@ -1,37 +1,45 @@
-<h1>Accidents list</h1>
+<h1>Accidents table</h1>
 
 <p *ngIf="!accidents"><em>Loading...</em></p>
 
-<div class="example-container">
+<div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource">
 
-    <!-- ID Column -->
+    <!--- Note that these columns can be defined in any order.
+  The actual rendered columns are set as a property on the row definition" -->
+    <!--IAD Column -->
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{accident.id}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <!-- Date Column -->
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{accident.date }} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
     </ng-container>
 
-    <!-- Accident Column -->
-    <ng-container matColumnDef="severity">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ accident.severity}} </mat-cell>
+    <!-- Latitude Column -->
+    <ng-container matColumnDef="lat">
+      <mat-header-cell *matHeaderCellDef> Latitude </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.location.coordinates.lat}} </mat-cell>
+    </ng-container>
+
+    <!-- Lonitude Column -->
+    <ng-container matColumnDef="lon">
+      <mat-header-cell *matHeaderCellDef> Lonitude </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.location.coordinates.lon}} </mat-cell>
+    </ng-container>
+
+    <!-- Tags Column -->
+    <ng-container matColumnDef="tags">
+      <mat-header-cell *matHeaderCellDef> Tags </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tags}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-
-  <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
-  </mat-paginator>
 </div>
 
 
