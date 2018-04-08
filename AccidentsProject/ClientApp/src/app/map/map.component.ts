@@ -7,7 +7,8 @@ declare var google: any;
 
 @Component({
   selector: 'app-map',
-  templateUrl: 'map.component.html'
+  templateUrl: 'map.component.html',
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
 
