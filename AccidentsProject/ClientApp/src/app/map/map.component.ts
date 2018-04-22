@@ -43,12 +43,10 @@ export class MapComponent implements OnInit {
 
   setStartDate(type: string, event: MatDatepickerInputEvent<Date>) {
     this.startDate = event.value;
-    console.log(`${type}: ${event.value}`);
   }
 
   setEndDate(type: string, event: MatDatepickerInputEvent<Date>) {
     this.endDate = event.value;
-    console.log(`${type}: ${event.value}`);
   }
 
   private initMap() {
@@ -80,5 +78,12 @@ export class MapComponent implements OnInit {
         this.markers.push(marker);
       });
     }, error => console.error(error));    
+  }
+
+  resetAccidents(): void {
+    this.markers.forEach(marker => {
+      marker.setMap(null);
+    });
+    this.markers = [];
   }
 }
