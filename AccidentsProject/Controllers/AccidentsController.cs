@@ -21,23 +21,23 @@ namespace AccidentsProject.Controllers
 
         [HttpGet, Route("")]
         public async Task<IActionResult> GetAccidentsAsync(
-            [FromQuery]DateTime startDate, 
-            [FromQuery]DateTime endDate, 
-            [FromQuery]string[] tags)
+            [FromQuery]DateTime? startDate = null, 
+            [FromQuery]DateTime? endDate = null, 
+            [FromQuery]string[] tags = null)
         {
             IEnumerable<Accident> accidents = 
                 await this.accidentService.GetAccidentsAsync()
                     .ConfigureAwait(false);
 
-            if (tags.Any())
+            if (tags != null && tags.Any())
             {
                 accidents = accidents.Where(a => tags.All(tag => a.Tags.Contains(tag)));
             }
 
             if (startDate != null && endDate != null)
             {
-                accidents = accidents.Where(a => a.Date >= startDate.Date && 
-                    a.Date <= endDate.AddDays(1).AddTicks(-1));
+                accidents = accidents.Where(a => a.Date >= startDate.Value.Date && 
+                    a.Date <= endDate.Value.AddDays(1).AddTicks(-1));
             }
 
             return Ok(accidents.Select(AccidentDto.From).ToArray());
