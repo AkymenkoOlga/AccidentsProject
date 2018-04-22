@@ -35,14 +35,16 @@ export class MapComponent implements OnInit {
     this.http = http;
     this.baseUrl = baseUrl;
     this.markers = [];
+  }
 
-    http.get<string[]>(baseUrl + 'api/accidents/tags').subscribe(result => {
-      result.forEach(tag => {
-        this.tags[tag] = false;
-      });
+  private initMap() {
+    var mapProp = {
+      center: new google.maps.LatLng(40.884800, -77.765863),
+      zoom: 7,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 
-      console.log(this.tags);
-    }, error => console.error(error));
+    this.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 
   setStartDate(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -53,14 +55,8 @@ export class MapComponent implements OnInit {
     this.endDate = event.value;
   }
 
-  private initMap() {
-    var mapProp = {
-      center: new google.maps.LatLng(51.508742, -0.120850),
-      zoom: 5,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    this.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  tagClicked(event) {
+    this.tags[event.source.value] = event.checked;
   }
 
   loadAccidents(): void {
@@ -83,7 +79,6 @@ export class MapComponent implements OnInit {
     this.http.get<Accident[]>(request)
       .subscribe(result => {
         this.accidents = result;
-        console.log("this.accidents", this.accidents);
 
       this.accidents.forEach(accident => {
         var marker = new google.maps.Marker({
@@ -111,9 +106,5 @@ export class MapComponent implements OnInit {
       marker.setMap(null);
     });
     this.markers = [];
-  }
-
-  tagClicked(event) {
-    this.tags[event.source.value] = event.checked;
   }
 }
