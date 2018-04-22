@@ -1,9 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import Appcomponent = require("../app.component");
 import Accident = Appcomponent.Accident;
 declare var google: any;
+declare let map: any;
 
 @Component({
   selector: 'app-map',
@@ -12,32 +14,73 @@ declare var google: any;
 })
 export class MapComponent implements OnInit {
 
+  private http: HttpClient;
+  private baseUrl: string;
+
   private tags: string[];
   private accidents: Accident[];
+  private accidentsMarkers: any[] = [];
+  private markers: any[] = [];
+
+  private startDate: Date;
+  private endDate: Date;
 
   ngOnInit() {
+    this.initMap();
+  }
+
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.http = http;
+    this.baseUrl = baseUrl;
+    this.markers = [];
+
+    http.get<string[]>(baseUrl + 'api/accidents/tags').subscribe(result => {
+      this.tags = result;
+      console.log(this.tags);
+    }, error => console.error(error));
+  }
+
+  setStartDate(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.startDate = event.value;
+    console.log(`${type}: ${event.value}`);
+  }
+
+  setEndDate(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.endDate = event.value;
+    console.log(`${type}: ${event.value}`);
+  }
+
+  private initMap() {
     var mapProp = {
       center: new google.maps.LatLng(51.508742, -0.120850),
       zoom: 5,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-    let startDate = new FormControl(new Date());
-    let endDate = new FormControl(new Date());
-
+    map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<string[]>(baseUrl + 'api/accidents/tags').subscribe(result => {
-      this.tags = result;
-      console.log(this.tags);
-    }, error => console.error(error));
+  loadAccidents(): void {
 
-    http.get<Accident[]>(baseUrl + 'api/accidents').subscribe(result => {
+    console.log("startDate", this.startDate);
+    console.log("endDate", this.endDate);
+
+    this.http.get<Accident[]>(this.baseUrl + 'api/accidents').subscribe(result => {
       this.accidents = result;
       console.log(this.accidents);
-    }, error => console.error(error));
+
+      this.accidents.forEach(function (accident) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(accident.location.coordinates.lat,
+            accident.location.coordinates.lon),
+          map: this.map,
+          title: accident.date
+        });
+        this.markers.push(marker);
+      });
+
+      console.log(this.markers);
+
+    }, error => console.error(error));    
   }
 }
