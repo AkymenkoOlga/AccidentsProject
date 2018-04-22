@@ -31,12 +31,25 @@ namespace AccidentsProject.Repositories
                 await this.InsertOneAsync(new AccidentEntity()
                 {
                     Id = Guid.NewGuid().ToString(),
+                    Date = DateTime.Now.AddDays(-1).ToUniversalTime(),
+                    Location = new LocationEntity() { Latitude = GetRandomNumber(49.0, 49.5), Longitude = GetRandomNumber(9.0, 9.5) },
+                    Tags = tags.OrderBy(arg => Guid.NewGuid()).Take(2).ToList()
+                });
+                x++;
+            } while (x < 5);
+
+            x = 0;
+            do
+            {
+                await this.InsertOneAsync(new AccidentEntity()
+                {
+                    Id = Guid.NewGuid().ToString(),
                     Date = DateTime.Now.ToUniversalTime(),
                     Location = new LocationEntity() { Latitude = GetRandomNumber(49.0, 49.5), Longitude = GetRandomNumber(9.0, 9.5) },
                     Tags = tags.OrderBy(arg => Guid.NewGuid()).Take(2).ToList()
                 });
                 x++;
-            } while (x < 25);
+            } while (x < 5);
         }
 
         private static double GetRandomNumber(double minimum, double maximum)

@@ -61,12 +61,17 @@ export class MapComponent implements OnInit {
 
   loadAccidents(): void {
 
-    console.log("startDate", this.startDate);
-    console.log("endDate", this.endDate);
+    if (!this.startDate || !this.endDate) {
+      return;
+    }
 
-    this.http.get<Accident[]>(this.baseUrl + 'api/accidents').subscribe(result => {
-      this.accidents = result;
-      console.log("this.accidents", this.accidents);
+    this.resetAccidents();
+
+    this.http.get<Accident[]>(this.baseUrl + 'api/accidents?startDate=' +
+      this.startDate.toDateString() + '&endDate=' + this.endDate.toDateString())
+      .subscribe(result => {
+        this.accidents = result;
+        console.log("this.accidents", this.accidents);
 
       this.accidents.forEach(accident => {
         var marker = new google.maps.Marker({

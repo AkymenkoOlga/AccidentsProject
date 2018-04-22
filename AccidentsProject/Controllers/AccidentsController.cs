@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AccidentsProject.Controllers.Dtos;
@@ -19,11 +20,17 @@ namespace AccidentsProject.Controllers
         }
 
         [HttpGet, Route("")]
-        public async Task<IActionResult> GetAccidentsAsync()
+        public async Task<IActionResult> GetAccidentsAsync([FromQuery]DateTime startDate, [FromQuery]DateTime endDate)
         {
             IEnumerable<Accident> accidents = 
                 await this.accidentService.GetAccidentsAsync()
                     .ConfigureAwait(false);
+
+            if (startDate != null && endDate != null)
+            {
+                accidents = accidents.Where(a => a.Date >= startDate.Date && 
+                    a.Date <= endDate.AddDays(1).AddTicks(-1));
+            }
 
             return Ok(accidents.Select(AccidentDto.From).ToArray());
         }
