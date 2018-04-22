@@ -16,9 +16,9 @@ namespace AccidentsProject.Repositories
         public AccidentRepository(IMongoClient client)
             : base(client, DatabaseName, CollectionName)
         {
-            // TODO: remove once there is a real data in MongoDB
-            client.DropDatabase(DatabaseName);
-            this.Reset().Wait();
+            // use for debug (to pump dummy data)
+            //client.DropDatabase(DatabaseName);
+            //this.Reset().Wait();
         }
 
         private async Task Reset()
