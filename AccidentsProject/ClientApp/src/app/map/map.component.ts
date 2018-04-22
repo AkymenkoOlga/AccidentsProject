@@ -20,6 +20,7 @@ export class MapComponent implements OnInit {
   private accidents: Accident[];
   private accidentsMarkers: any[] = [];
   private markers: any[] = [];
+  private markerCluster: any;
 
   private map: any;
 
@@ -81,7 +82,12 @@ export class MapComponent implements OnInit {
           title: accident.date
         });
         this.markers.push(marker);
-      });
+        });
+
+      // Add a marker clusterer to manage the markers.
+      this.markerCluster = new MarkerClusterer(this.map, this.markers,
+        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
     }, error => console.error(error));    
   }
 
