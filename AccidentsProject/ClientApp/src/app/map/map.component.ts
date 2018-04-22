@@ -5,6 +5,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import Appcomponent = require("../app.component");
 import Accident = Appcomponent.Accident;
 declare var google: any;
+declare var MarkerClusterer: any;
 
 @Component({
   selector: 'app-map',
@@ -92,6 +93,10 @@ export class MapComponent implements OnInit {
   }
 
   resetAccidents(): void {
+    if (!!this.markerCluster) {
+      this.markerCluster.clearMarkers();
+    }
+
     this.markers.forEach(marker => {
       marker.setMap(null);
     });
