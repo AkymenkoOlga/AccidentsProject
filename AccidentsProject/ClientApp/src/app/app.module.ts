@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -97,6 +98,7 @@ export class DemoMaterialModule { }
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     DemoMaterialModule,
