@@ -17,16 +17,15 @@ export class MapComponent implements OnInit {
   private http: HttpClient;
   private baseUrl: string;
 
-  private tags: string[];
   private accidents: Accident[];
   private accidentsMarkers: any[] = [];
   private markers: any[] = [];
   private markerCluster: any;
-
   private map: any;
 
   private startDate: Date;
   private endDate: Date;
+  private tags: any = {};
 
   ngOnInit() {
     this.initMap();
@@ -38,7 +37,10 @@ export class MapComponent implements OnInit {
     this.markers = [];
 
     http.get<string[]>(baseUrl + 'api/accidents/tags').subscribe(result => {
-      this.tags = result;
+      result.forEach(tag => {
+        this.tags[tag] = false;
+      });
+
       console.log(this.tags);
     }, error => console.error(error));
   }
@@ -69,8 +71,16 @@ export class MapComponent implements OnInit {
 
     this.resetAccidents();
 
-    this.http.get<Accident[]>(this.baseUrl + 'api/accidents?startDate=' +
-      this.startDate.toDateString() + '&endDate=' + this.endDate.toDateString())
+    var request = this.baseUrl + 'api/accidents?startDate=' +
+      this.startDate.toDateString() + '&endDate=' + this.endDate.toDateString() + '&';
+
+    for (let key in this.tags) {
+      if (this.tags[key]) {
+        request += 'tags=' + key + '&';
+      }
+    }
+
+    this.http.get<Accident[]>(request)
       .subscribe(result => {
         this.accidents = result;
         console.log("this.accidents", this.accidents);
@@ -101,5 +111,9 @@ export class MapComponent implements OnInit {
       marker.setMap(null);
     });
     this.markers = [];
+  }
+
+  tagClicked(event) {
+    this.tags[event.source.value] = event.checked;
   }
 }

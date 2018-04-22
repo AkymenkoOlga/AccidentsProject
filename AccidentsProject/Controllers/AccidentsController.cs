@@ -20,11 +20,19 @@ namespace AccidentsProject.Controllers
         }
 
         [HttpGet, Route("")]
-        public async Task<IActionResult> GetAccidentsAsync([FromQuery]DateTime startDate, [FromQuery]DateTime endDate)
+        public async Task<IActionResult> GetAccidentsAsync(
+            [FromQuery]DateTime startDate, 
+            [FromQuery]DateTime endDate, 
+            [FromQuery]string[] tags)
         {
             IEnumerable<Accident> accidents = 
                 await this.accidentService.GetAccidentsAsync()
                     .ConfigureAwait(false);
+
+            if (tags.Any())
+            {
+                accidents = accidents.Where(a => tags.All(tag => a.Tags.Contains(tag)));
+            }
 
             if (startDate != null && endDate != null)
             {
