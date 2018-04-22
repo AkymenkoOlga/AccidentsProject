@@ -4,3 +4,10 @@
   width: 500px;
   height: 380px;
 }
+
+.tags-selection {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 40px;
+}
