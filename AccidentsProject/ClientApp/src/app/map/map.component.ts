@@ -5,7 +5,6 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import Appcomponent = require("../app.component");
 import Accident = Appcomponent.Accident;
 declare var google: any;
-declare let map: any;
 
 @Component({
   selector: 'app-map',
@@ -21,6 +20,8 @@ export class MapComponent implements OnInit {
   private accidents: Accident[];
   private accidentsMarkers: any[] = [];
   private markers: any[] = [];
+
+  private map: any;
 
   private startDate: Date;
   private endDate: Date;
@@ -57,7 +58,7 @@ export class MapComponent implements OnInit {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    this.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
   }
 
   loadAccidents(): void {
@@ -67,9 +68,9 @@ export class MapComponent implements OnInit {
 
     this.http.get<Accident[]>(this.baseUrl + 'api/accidents').subscribe(result => {
       this.accidents = result;
-      console.log(this.accidents);
+      console.log("this.accidents", this.accidents);
 
-      this.accidents.forEach(function (accident) {
+      this.accidents.forEach(accident => {
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(accident.location.coordinates.lat,
             accident.location.coordinates.lon),
@@ -78,9 +79,6 @@ export class MapComponent implements OnInit {
         });
         this.markers.push(marker);
       });
-
-      console.log(this.markers);
-
     }, error => console.error(error));    
   }
 }
