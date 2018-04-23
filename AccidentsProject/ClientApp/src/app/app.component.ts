@@ -11,6 +11,7 @@ export class AppComponent {
 
 export interface Accident {
   id: string;
+  externalId: string;
   date: Date;
   location: Location;
   tags: string[];
