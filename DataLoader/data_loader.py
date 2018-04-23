@@ -6,8 +6,8 @@ import math
 
 
 def is_valid_accident(accident):
-    return not math.isnan(accident['location']['coordinates']['lat']) or \
-           not math.isnan(accident['location']['coordinates']['lon'])
+    return not (math.isnan(accident['location']['coordinates']['lat']) or \
+            math.isnan(accident['location']['coordinates']['lon']))
 
 
 def send_accident(accident):
