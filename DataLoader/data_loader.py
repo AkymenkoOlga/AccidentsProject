@@ -19,18 +19,17 @@ def send_accident(accident):
 
 
 # get a data frame from csv file
-df = pandas.read_csv('data\CRASH_2017.csv')
+data = pandas.read_csv('data\CRASH_2017.csv')
+
+# select columns (CRN - Crash Record Number, is a unique key of an accident)
+selected_fields = ['DEC_LAT', 'DEC_LONG', 'AUTOMOBILE_COUNT', 'BICYCLE_COUNT', 'FATAL_COUNT', 'MOTORCYCLE_COUNT',
+                    'ILLUMINATION', 'CRN', 'CRASH_YEAR', 'CRASH_MONTH']
 
 # get a data frame with selected columns
-meta_fields = ['DEC_LAT', 'DEC_LONG', 'AUTOMOBILE_COUNT', 'BICYCLE_COUNT', 'FATAL_COUNT', 'MOTORCYCLE_COUNT',
-               'ILLUMINATION', 'CRN']
-date_fields = ['CRASH_YEAR', 'CRASH_MONTH']
+data_selected = data[selected_fields].to_dict(orient='records')
 
-selected_fields = meta_fields.extend(date_fields)
-
-df_selected = df[meta_fields].to_dict(orient='records')
-
-for each in df_selected:
+# construct accidents and send to AccidentsProject API
+for each in data_selected:
     accident = {
       "date": str(datetime.datetime(year=int(each['CRASH_YEAR']), month=int(each['CRASH_MONTH']), day=1)),
       "location": {
@@ -39,12 +38,12 @@ for each in df_selected:
           "lon": each['DEC_LONG']
         }
       },
-      "name": each['CRN'],
+      "externalId": each['CRN'],
       "tags": []
     }
 
     if not is_valid_accident(accident):
-        print('invalid accident', accident['name'])
+        print('invalid accident', accident['externalId'])
         continue
 
     # add tags
@@ -59,7 +58,7 @@ for each in df_selected:
 
     if each['ILLUMINATION'] == 1:
         accident['tags'].extend(['day'])
-    else:
+    elif each['ILLUMINATION'] != 8 and each['ILLUMINATION'] != 9:
         accident['tags'].extend(['night'])
 
     send_accident(json.dumps(accident))
