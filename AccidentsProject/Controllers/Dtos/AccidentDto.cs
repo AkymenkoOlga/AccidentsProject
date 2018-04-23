@@ -15,8 +15,8 @@ namespace AccidentsProject.Controllers.Dtos
         [JsonProperty("location")]
         public LocationDto Location { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("externalId")]
+        public string ExternalId { get; set; }
 
         [JsonProperty("tags")]
         public string[] Tags { get; set; }
@@ -26,6 +26,7 @@ namespace AccidentsProject.Controllers.Dtos
             return new Accident()
             {
                 Id = this.Id,
+                ExternalId = this.ExternalId,
                 Date = this.Date,
                 Location = this.Location?.ToModel(),
                 Tags = this.Tags
@@ -36,6 +37,7 @@ namespace AccidentsProject.Controllers.Dtos
             => new AccidentDto
             {
                 Id = accident.Id,
+                ExternalId = accident.ExternalId,
                 Date = accident.Date,
                 Location = accident.Location != null ? LocationDto.From(accident.Location) : null,
                 Tags = accident.Tags
